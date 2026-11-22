@@ -4,7 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-SmartBasket AI is at the **pre-code stage**: the repository holds no source files yet, and it is not a git repository. Build/run/test commands are not defined yet. Add them here once the first code lands. Do not invent them before then.
+The MVP is built (Streamlit app, calculations, validation, scenarios, AI explanation component, tests). It is not yet pushed to GitHub, and has not been user-tested.
+
+### Commands (Windows, PowerShell; Python 3.12 in `.venv`)
+- Setup once: `python -m venv .venv` then `.\.venv\Scripts\python.exe -m pip install -r requirements.txt`
+- Run the app: `.\.venv\Scripts\python.exe -m streamlit run app.py` (opens http://localhost:8501)
+- Run tests: `.\.venv\Scripts\python.exe -m pytest -q`
+- AI key: `ANTHROPIC_API_KEY` in `.streamlit/secrets.toml` (git-ignored; copy from `secrets.toml.example`) or as an environment variable. Never commit a key.
+
+### Layout
+`core/` business logic with no Streamlit (models, calculations in Decimal, validation, scenarios, basket_io, catalog) · `ai/` (payload, prompt, llm_client, fallback) · `ui/` (one module per tab) · `data/demo_catalog.csv` · `tests/`. The AI provider in `ai/llm_client.py` is provisional (Anthropic SDK, model overridable by `SMARTBASKET_LLM_MODEL`) until the lecturer approves a service.
 
 The source of truth is the product spec (Hebrew, v2.0) that the team supplied. This file condenses the parts that constrain the code.
 
